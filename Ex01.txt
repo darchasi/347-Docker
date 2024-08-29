@@ -1,0 +1,29 @@
+Docker login | à ne pas oublier de se connecter
+Docker pull hello-world. Il va chercher l'image du hello-world pour l'utiliser
+Docker images | Montre les images présentes dans notre docker
+Docker run hello-world | Il va créer un conteneur sur la base de l'image que nous l'avons donné
+Si on fait run sans faire pull, run tout seul va faire un pull pour chercher l'image
+Docker ps
+Docker container ps On voit pas le hello-world c'est parce qu'il est pas démarrer
+Docker ps -a ou -all c'est pour voir tous les conteneurs
+On le voyé pas parce que il tourné pas en continue 
+Docker pull ubuntu
+Docker run -dti ubuntu | Disstach
+Docker run -ti ubuntu | Terminal interactif
+Docker ps -a
+
+Docker stop nomcontainer
+
+docker ps -a Tout les conteneurs sont exited
+
+docker run -it ubuntu
+
+cat /etc/*release*
+
+ls -l /etc/*release*
+
+cat /etc/os-release
+exit
+
+docker run -it alpine
+ps tree
