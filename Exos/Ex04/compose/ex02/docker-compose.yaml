@@ -1,0 +1,30 @@
+services:
+  db:
+    image: mysql:latest # Définit la version de mysql que nous allons utiliser
+    container_name: mysql # Nom du conteneur
+    environment:
+      MYSQL_ROOT_PASSWORD: root # Mot de passe du root
+      MYSQL_DATABASE: AppNotes # Nom de la base de données
+      MYSQL_USER: user # Utilisateur
+      MYSQL_PASSWORD: user_mdp # Mot de passe de l'utilisateur
+    restart: always # Le conteneur s'active continuellement
+    ports:
+      - "3306:3306" # Port 3306: choisi par l'utilisateur et le port :3306 ap
+    volumes: 
+      - C:\data\mysql-d:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin:5.2.0 # Définit la version de phpmyadmin que nous allons utiliser
+    container_name: phpmyadmin # Nom du conteneur
+    links:
+      - db # Il est lié à la base de données
+    environment:
+      PMA_HOST: mysql # Il reprend le host du conteneur nommé mysql
+      PMA_PORT: 3306 # Il reprend le port appartenant à mysql
+      PMA_ARBITRARY: 1 # Si PMA_ARBITRARY est égal à 1, la connexion au serveur arbitraire sera autorisée. Cela signifie que vous pouvez vous connecter à n’importe quel serveur MySQL, pas seulement à celui spécifié dans la configuration de phpMyAdmin.
+    restart: always # Le conteneur s'active continuellement
+    ports:
+      - "8080:80" # Port 8080: choisi par l'utilisateur et le port :80 appartient à phpmyadmin
+    depends_on:
+      - db # Attend que la db soit prête pour commencer
+volumes:
+  dbdata: 

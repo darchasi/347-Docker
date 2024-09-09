@@ -1,0 +1,20 @@
+services:
+  db:
+    image: mysql:latest # Définit la version de mysql que nous allons utiliser
+    container_name: mysql # Nom du conteneur
+    environment:
+      MYSQL_ROOT_PASSWORD: root # Mot de passe du root
+      MYSQL_DATABASE: AppNotes # Nom de la base de données
+      MYSQL_USER: user # Utilisateur
+      MYSQL_PASSWORD: user_mdp # Mot de passe de l'utilisateur
+    restart: always # Le conteneur s'active continuellement
+    ports:
+      - "3306:3306" # Port 3306: choisi par l'utilisateur et le port :3306 ap
+    volumes: 
+      - C:\data\mysql-c:/var/lib/mysql
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+volumes:
+  dbdata: 
