@@ -1,0 +1,37 @@
+services:
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      flask:
+        condition: service_healthy
+        restart: true
+  flask:
+    build: ./app
+    container_name: flask
+    volumes:
+      - ./app:/app
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      mysql:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "5000:5000"
+  mysql:
+    image: mysql:8.1
+    container_name: mysql
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: mydatabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
